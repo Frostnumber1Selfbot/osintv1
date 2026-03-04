@@ -1,11 +1,3 @@
-/**
- * ============================================================================
- * TITAN OSINT KERNEL - ENTERPRISE EDITION v6.4.1
- * ============================================================================
- * Internal build for restricted access.
- * ----------------------------------------------------------------------------
- */
-
 const express = require('express');
 const session = require('express-session');
 const fs = require('fs');
@@ -15,11 +7,11 @@ const os = require('os');
 const axios = require('axios');
 const http = require('http');
 
-// --- SERVER CONSTANTS ---
+
 const app = express();
 const PORT = 3000;
 
-// --- PERSISTENCE LAYER PATHS ---
+
 const DB_PATH = path.join(__dirname, 'user.json');
 const LOG_FILE = path.join(__dirname, 'relay.log');
 const ERROR_LOG = path.join(__dirname, 'error.log');
@@ -27,16 +19,13 @@ const BACKUP_DIR = path.join(__dirname, 'backups');
 const DATA_TXT_PATH = path.join(__dirname, 'views', 'data.txt');
 const SYSTEM_STATE = path.join(__dirname, 'state.lock');
 
-// --- API INTEGRATION REGISTRY ---
+
 const CLUSTER_NODE = "http://94.249.230.111:8000";
 const SHODAN_KEY = "ZInUV2niG7iKGxJBz9buYLc78qKxG5Mq"; 
 const GHOSINT_KEY = "659239a4a836bf1d67a51102460867d8";
 const NUMLOOKUP_KEY = "num_live_fngAi2HkDW2He2XXXU4FFAusGchy0gQ8BxnDSe1r";
 
-/**
- * KERNEL INITIALIZATION SEQUENCE
- * Ensures all critical IO structures are present before boot.
- */
+
 const initializeKernel = () => {
     console.log("[SYSTEM] Initializing Filesystem...");
     if (!fs.existsSync(BACKUP_DIR)) fs.mkdirSync(BACKUP_DIR, { recursive: true });
@@ -57,9 +46,7 @@ const initializeKernel = () => {
 };
 initializeKernel();
 
-/**
- * WEB SERVER CONFIGURATION
- */
+
 app.set('view engine', 'ejs');
 app.set('views', [path.join(__dirname, '.'), path.join(__dirname, 'views')]);
 
@@ -69,7 +56,7 @@ app.use(express.static('public'));
 
 app.use(session({
     name: 'TITAN_SID',
-    secret: 'titan_omega_shards_9921_ultra_secure_entropy_raw_build_v6',
+    secret: 'Nigger',
     resave: false,
     saveUninitialized: false,
     rolling: true,
@@ -81,16 +68,14 @@ app.use(session({
     }
 }));
 
-/**
- * DATABASE KERNEL MODULE
- */
+
 function loadDB() {
     try {
         if (!fs.existsSync(DB_PATH)) {
             const initial = { 
                 users: [{ 
-                    username: 'admin', 
-                    password: '123', 
+                    username: 'admin@osinting.info',
+                    password: 'adminosint',
                     role: 'admin', 
                     locked: false, 
                     expiry: 4102444800000 
@@ -104,7 +89,7 @@ function loadDB() {
         const data = fs.readFileSync(DB_PATH, 'utf8');
         return JSON.parse(data);
     } catch (err) {
-        console.error("CRITICAL_IO_READ_FAILURE:", err);
+        console.error("Failure", err);
         return { users: [], pending_keys: [], audit: [] };
     }
 }
@@ -119,9 +104,7 @@ function saveDB(data) {
     }
 }
 
-/**
- * AUDIT & TELEMETRY SYSTEMS
- */
+
 function pushAudit(db, admin, action, target, extra = {}) {
     const entry = {
         id: crypto.randomBytes(4).toString('hex').toUpperCase(),
@@ -153,9 +136,7 @@ function getMetrics() {
     };
 }
 
-/**
- * GATEKEEPER MIDDLEWARE
- */
+
 const authenticate = (req, res, next) => {
     if (req.session.user) return next();
     if (req.xhr || req.path.startsWith('/api/')) return res.status(401).json({ error: "UNAUTHORIZED_ACCESS" });
@@ -167,9 +148,7 @@ const authorizeAdmin = (req, res, next) => {
     res.status(403).send("ACCESS_DENIED: INSUFFICIENT_PRIVILEGE");
 };
 
-/**
- * PAGE ROUTING
- */
+
 app.get('/', (req, res) => res.redirect('/login'));
 
 app.get('/login', (req, res) => {
@@ -178,6 +157,8 @@ app.get('/login', (req, res) => {
 });
 
 app.get('/plans', (req, res) => res.render('plans'));
+
+
 
 app.get('/dashboard', authenticate, (req, res) => {
     const db = loadDB();
@@ -276,10 +257,7 @@ app.post('/api/admin/action', authenticate, authorizeAdmin, (req, res) => {
     }
 });
 
-/**
- * CORE RELAY INTERFACE
- * RESTORED: All output functions and custom Discord2Roblox script logic.
- */
+
 app.post('/api/relay', authenticate, async (req, res) => {
     const { endpoint, query, type, isPhone, isGhosint, split, param } = req.body;
     const startTime = Date.now();
@@ -294,20 +272,20 @@ app.post('/api/relay', authenticate, async (req, res) => {
         const axiosConfig = { timeout: 15000, headers: { 'User-Agent': 'Titan_Omega_Internal' } };
         let resultData;
 
-        // --- SPECIAL HANDLER: DISCORD TO ROBLOX (EXACT SCRIPT LOGIC) ---
+
         if (endpoint === '/api/discord2roblox' || endpoint.includes('discord2roblox')) {
             try {
-                // Request A: Eryn/Linkage API
+
                 const erynResp = await axios.get(`https://verify.eryn.io/api/user/${query}`, axiosConfig);
                 const jsn = erynResp.data;
 
                 if (jsn && jsn.status === "ok") {
                     try {
-                        // Request B: Roblox Users V1 API
+
                         const robloxResp = await axios.get(`https://users.roblox.com/v1/users/${jsn.robloxId}`, axiosConfig);
                         const jsn2 = robloxResp.data;
 
-                        // Formatting exactly like your script output
+
                         resultData = {
                             "Status": `Successfully got data for id ${query}`,
                             "Roblox Id": jsn.robloxId,
@@ -317,7 +295,7 @@ app.post('/api/relay', authenticate, async (req, res) => {
                             "Description": jsn2.description ? jsn2.description.split('\n').join('\n\t - ') : "None"
                         };
                     } catch (innerError) {
-                        // Partial data fallback
+
                         resultData = {
                             "Status": "Was only able to get some data.",
                             "Roblox Id": jsn.robloxId,
@@ -332,7 +310,7 @@ app.post('/api/relay', authenticate, async (req, res) => {
             }
         }
 
-        // --- HANDLER: LOCAL BREACH DATABASE ---
+
         else if (endpoint === 'LOCAL_DISCORD_BREACH' || type === 'BREACH' || endpoint.includes('LOCAL')) {
             if (!fs.existsSync(DATA_TXT_PATH)) return res.json({ success: false, error: "SOURCE_OFFLINE" });
 
@@ -349,14 +327,14 @@ app.post('/api/relay', authenticate, async (req, res) => {
                 });
         }
         
-        // --- HANDLER: PHONE LOOKUP ---
+
         else if (isPhone || endpoint === 'DIRECT_PHONE') {
             const cleanPhone = query.replace(/\D/g, '');
             const resp = await axios.get(`https://api.numlookupapi.com/v1/validate/${cleanPhone}?apikey=${NUMLOOKUP_KEY}`, axiosConfig);
             resultData = resp.data;
         }
 
-        // --- HANDLER: GHOSINT AGGREGATOR ---
+
         else if (isGhosint) {
             const resp = await axios.post("https://api.ghosint.io/search", { 
                 key: GHOSINT_KEY, query: query.trim(), services: ['leakcheck', 'snusbase'] 
@@ -364,14 +342,14 @@ app.post('/api/relay', authenticate, async (req, res) => {
             resultData = resp.data;
         }
 
-        // --- HANDLER: SHODAN NODES ---
+
         else if (endpoint.startsWith('/shodan')) {
             const pathTail = endpoint.replace('/shodan', '');
             const resp = await axios.get(`https://api.shodan.io${pathTail}?key=${SHODAN_KEY}`, axiosConfig);
             resultData = resp.data;
         }
 
-        // --- HANDLER: EXTERNAL CLUSTER RELAY ---
+
         else {
             let finalUrl = `${CLUSTER_NODE}${endpoint}`;
             const sep = endpoint.includes('?') ? '&' : '?';
@@ -402,9 +380,7 @@ app.post('/api/relay', authenticate, async (req, res) => {
     }
 });
 
-/**
- * USER AUTHENTICATION API
- */
+
 app.post('/api/login', (req, res) => {
     const { username, password } = req.body;
     const db = loadDB();
@@ -460,10 +436,7 @@ app.get('/logout', (req, res) => {
     });
 });
 
-/**
- * MAINTENANCE & CRON SERVICE
- * Runs hourly to preserve data integrity and manage backups.
- */
+
 setInterval(() => {
     try {
         const db = loadDB();
@@ -487,22 +460,9 @@ setInterval(() => {
     }
 }, 3600000);
 
-/**
- * BOOTSTRAP LISTENER
- */
+
 const server = http.createServer(app);
 server.listen(PORT, '0.0.0.0', () => {
-    process.stdout.write('\x1Bc'); // Clear terminal
-    console.log(" ");
-    console.log(" \x1b[31m████████╗██╗████████╗ █████╗ ███╗   ██╗\x1b[0m");
-    console.log(" \x1b[31m╚══██╔══╝██║╚══██╔══╝██╔══██╗████╗  ██║\x1b[0m");
-    console.log(" \x1b[31m   ██║   ██║   ██║   ███████║██╔██╗ ██║\x1b[0m");
-    console.log(" \x1b[31m   ██║   ██║   ██║   ██╔══██║██║╚██╗██║\x1b[0m");
-    console.log(" \x1b[31m   ██║   ██║   ██║   ██║  ██║██║ ╚████║\x1b[0m");
-    console.log(" \x1b[31m   ╚═╝   ╚═╝   ╚═╝   ╚═╝  ╚═╝╚═╝  ╚═══╝\x1b[0m");
-    console.log(" ");
-    console.log(` \x1b[37m[NODE]\x1b[0m Titan Omega Kernel Online`);
-    console.log(` \x1b[37m[PORT]\x1b[0m Listening on 0.0.0.0:${PORT}`);
-    console.log(` \x1b[37m[VERS]\x1b[0m v6.4.1 Enterprise Build`);
+    process.stdout.write('\x1Bc');
     console.log(" ");
 });
