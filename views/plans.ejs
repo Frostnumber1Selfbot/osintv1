@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Access Plans</title>
+    <style>
+        :root {
+            --red: #ff0000;
+            --bg: #030303;
+            --card: #0a0a0a;
+            --border: #1a1a1a;
+            --text-dim: #888;
+        }
+
+        body { 
+            background: var(--bg); 
+            color: #eee; 
+            font-family: 'JetBrains Mono', monospace; 
+            margin: 0; 
+            display: flex; 
+            flex-direction: column;
+            align-items: center; 
+            min-height: 100vh;
+            background-image: radial-gradient(circle at top, #150000 0%, #030303 100%);
+        }
+
+        .header {
+            text-align: center;
+            padding: 60px 20px;
+        }
+
+        h1 { 
+            letter-spacing: 15px; 
+            font-size: 3rem; 
+            margin: 0;
+            text-shadow: 0 0 20px rgba(255, 0, 0, 0.5);
+        }
+
+        .tagline {
+            color: var(--red);
+            font-size: 10px;
+            letter-spacing: 4px;
+            margin-top: 10px;
+            text-transform: uppercase;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+            max-width: 1100px;
+            width: 90%;
+            margin-bottom: 50px;
+        }
+
+        .plan-card {
+            background: var(--card);
+            border: 1px solid var(--border);
+            padding: 40px;
+            text-align: center;
+            transition: 0.3s;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .plan-card:hover {
+            border-color: var(--red);
+            transform: translateY(-10px);
+            box-shadow: 0 10px 40px rgba(255, 0, 0, 0.1);
+        }
+
+        .plan-card.popular {
+            border: 1px solid var(--red);
+            background: linear-gradient(180deg, #0d0000 0%, #0a0a0a 100%);
+        }
+
+        .badge {
+            position: absolute;
+            top: 20px;
+            right: -30px;
+            background: var(--red);
+            color: white;
+            padding: 5px 40px;
+            font-size: 9px;
+            transform: rotate(45deg);
+            font-weight: bold;
+        }
+
+        .plan-name {
+            font-size: 12px;
+            color: var(--text-dim);
+            letter-spacing: 2px;
+            margin-bottom: 10px;
+        }
+
+        .price {
+            font-size: 40px;
+            font-weight: 900;
+            margin-bottom: 30px;
+        }
+
+        .price span { font-size: 16px; color: var(--text-dim); }
+
+        ul {
+            list-style: none;
+            padding: 0;
+            margin: 0 0 40px 0;
+            text-align: left;
+        }
+
+        li {
+            padding: 12px 0;
+            border-bottom: 1px solid #111;
+            font-size: 11px;
+            color: #aaa;
+        }
+
+        li::before {
+            content: ">> ";
+            color: var(--red);
+        }
+
+        .btn {
+            display: inline-block;
+            width: 100%;
+            padding: 5px;
+            background: #fff;
+            color: #000;
+            text-decoration: none;
+            font-weight: 900;
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            transition: 0.3s;
+        }
+
+        .btn:hover {
+            background: var(--red);
+            color: #fff;
+        }
+
+        .back-link {
+            color: var(--text-dim);
+            text-decoration: none;
+            font-size: 10px;
+            margin-bottom: 50px;
+        }
+
+        .back-link:hover { color: #fff; }
+    </style>
+</head>
+<body>
+
+    <div class="header">
+        <h1>OSINTING.INFO</h1>
+        <div class="tagline">Choose us</div>
+    </div>
+
+
+        <div class="plan-card">
+            <div class="plan-name">Access</div>
+            <div class="price">$25/<span>Lifetime</span></div>
+            <ul>
+                <li>14+ Module Access</li>
+                <li>Telegram Support Channel</li>
+                <li>Direct 24HR Support Staff</li>
+                <li>Early Access to new modules</li>
+            </ul>
+            <a href="https://t.me/@honormehoe" class="btn">Buy Now</a>
+
+        </div>
+    </div>
+
+    <a href="/login" class="back-link">Return To Login</a>
+
+</body>
+</html>
