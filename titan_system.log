@@ -1,0 +1,177 @@
+[2026-03-03T04:16:25.156Z] KERNEL_LOG_OPENED
+[2026-03-03T04:26:34.722Z] AUTH_SUCCESS: admin
+[2026-03-03T04:27:34.272Z] AUTH_SUCCESS: admin
+[2026-03-03T04:28:43.688Z] AUTH_SUCCESS: admin
+[2026-03-03T04:30:12.066Z] LOGIN_SUCCESS: admin
+[2026-03-03T04:36:44.028Z] LOGIN_SUCCESS: admin
+[2026-03-03T04:36:50.291Z] SERVER_SHUTDOWN_BY_OPERATOR
+[2026-03-03T05:45:05.694Z] UPLINK_REQUEST | ENDPOINT: /ud_breach?query= | QUERY: x@x.com
+[2026-03-03T05:45:25.919Z] UPLINK_REQUEST | ENDPOINT: /person?fullname= | QUERY: John doe
+[HEARTBEAT] 2026-03-03T05:54:35.415Z | RSS: 59.14MB | HEAP: 10.51MB
+[RELAY] admin REQUESTED rawr
+[RELAY] admin REQUESTED rawr
+[RELAY] admin REQUESTED 1.1.1.1
+[RELAY] admin REQUESTED rawr
+[RELAY] arf REQUESTED rawr
+[RELAY] arf REQUESTED x@x.com
+[RELAY] arf REQUESTED x@x.com
+[RELAY] arf REQUESTED x@x.com
+[RELAY] arf REQUESTED 1429147686929567826
+[RELAY] arf REQUESTED rawr
+[RELAY] admin REQUESTED rawr
+[RELAY] admin REQUESTED x@x.com
+[RELAY] admin REQUESTED x@x.com
+[RELAY] admin REQUESTED rawr
+[RELAY] admin REQUESTED x@x.com
+[RELAY] admin REQUESTED x@x.com
+[RELAY] admin REQUESTED x@x.com
+[RELAY] admin REQUESTED x@x.com
+[RELAY] admin REQUESTED x@x.com
+[RELAY] admin REQUESTED x@x.com
+[RELAY] admin REQUESTED x@x.com
+[RELAY] admin REQUESTED x@x.com
+[RELAY] admin REQUESTED x@x.com
+[RELAY] admin REQUESTED rawr
+[RELAY] admin REQUESTED x@x.com
+[RELAY] admin REQUESTED x@x.com
+[RELAY] admin REQUESTED x@x.com
+[RELAY] admin REQUESTED x@x.com
+[RELAY] admin REQUESTED x@x.com
+[RELAY] admin REQUESTED x@x.com
+[RELAY] admin REQUESTED x@x.com
+[RELAY] admin REQUESTED x@x.com
+[RELAY] admin REQUESTED x@x.com
+[RELAY] admin REQUESTED x@x.com
+[RELAY] admin REQUESTED x@x.com
+[RELAY] admin REQUESTED x@x.com
+[RELAY] admin REQUESTED x@x.com
+[RELAY] admin REQUESTED x@x.com
+[RELAY] admin REQUESTED x@x.com
+[RELAY] admin REQUESTED 1429147686929567826
+[RELAY] admin REQUESTED rawr
+[RELAY] admin REQUESTED John
+[RELAY] admin REQUESTED John
+[RELAY] admin REQUESTED 1.1.1.1
+[RELAY] admin REQUESTED 1.1.1.1
+[RELAY] admin REQUESTED x@x.com
+[RELAY] admin REQUESTED x@x.com
+[RELAY] admin REQUESTED x@x.com
+[RELAY] admin REQUESTED x@x.com
+[RELAY] admin REQUESTED x@x.com
+[RELAY] admin REQUESTED x@x.com
+[RELAY] admin REQUESTED x@x.com
+[RELAY] admin ACCESSING /api/relay
+[RELAY] admin ACCESSING /ud_breach?query=
+[RELAY] admin ACCESSING /check?q=
+[RELAY] admin ACCESSING /api/shodan/protocols
+[RELAY] admin ACCESSING /api/shodan/host
+[RELAY] admin ACCESSING /api/ghosint
+[RELAY] admin EXEC: /api/shodan/host ON 1.1.1.1
+[RELAY] admin EXEC: /api/shodan/search ON 1.1.1.1
+[RELAY] admin EXEC: /api/shodan/count ON 1.1.1.1
+[RELAY] admin EXEC: /api/shodan/ports ON 1.1.1.1
+[RELAY] admin EXEC: /api/shodan/protocols ON 1.1.1.1
+[RELAY] admin EXEC: /api/ghosint ON rawr
+[RELAY] admin EXEC: /ud_breach?query= ON rawr
+[RELAY] admin EXEC: /api/shodan/host ON rawr
+[RELAY] admin EXEC: /api/shodan/host ON 1.1.1.1
+[RELAY] admin EXEC: /api/ghosint ON rawr
+[RELAY] admin EXEC: /api/ghosint ON rawr
+[RELAY] admin EXEC: /ud_breach?query= ON rawr
+[RELAY] admin -> api.ghosint.io -> rawr
+[RELAY] admin -> /ud_breach -> rawr
+[RELAY] admin -> /api/ghosint -> rawr
+[RELAY] admin -> /dh_roblox -> rawr
+[RELAY] admin -> /api/ghosint -> rawr
+[RELAY] admin -> /api/ghosint -> rawr
+[RELAY] admin -> /ud_breach -> x@x.com
+[RELAY] admin -> discord2roblox -> 1429147686929567826
+[RELAY] admin -> discord2roblox -> 1475109660561510553
+[RELAY_REQ] USER:admin -> ENDPOINT:/api/ghosint -> Q:rawr
+[RELAY_REQ] USER:admin -> ENDPOINT:/api/breach -> Q:x@x.com
+[RELAY_REQ] USER:admin -> ENDPOINT:/api/ghosint -> Q:x@x.com
+[RELAY_REQ] USER:admin -> ENDPOINT:/api/ghosint -> Q:rawr
+[RELAY_REQ] USER:admin -> ENDPOINT:/api/ghosint -> Q:rawr
+[RELAY_REQ] USER:admin -> ENDPOINT:/api/ghosint -> Q:x@x.com
+[RELAY_REQ] USER:admin -> ENDPOINT:/api/ghosint -> Q:x@x.com
+[RELAY_REQ] USER:admin -> ENDPOINT:/api/ghosint -> Q:x@x.com
+[RELAY_REQ] USER:admin -> ENDPOINT:/api/ghosint -> Q:admin
+[RELAY_REQ] USER:admin -> ENDPOINT:/api/ghosint -> Q:x@x.com
+[RELAY_REQ] USER:admin -> ENDPOINT:/breachvip -> Q:x@x.com
+[RELAY_REQ] USER:admin -> ENDPOINT:/ud_breach -> Q:x@x.com
+[RELAY_REQ] USER:admin -> ENDPOINT:/api/ghosint -> Q:x
+[RELAY_REQ] USER:admin -> ENDPOINT:/api/breach -> Q:x
+[RELAY_REQ] USER:admin -> ENDPOINT:/ud_breach -> Q:x
+[RELAY_REQ] USER:admin -> ENDPOINT:/api/ghosint -> Q:rawr
+[RELAY_REQ] USER:admin -> ENDPOINT:/api/ghosint -> Q:x
+[RELAY_REQ] USER:admin -> ENDPOINT:/breachvip -> Q:x
+[RELAY_REQ] USER:admin -> ENDPOINT:/api/roblox -> Q:xraa
+[RELAY_REQ] USER:admin -> ENDPOINT:/api/discord -> Q:1475109660561510553
+[RELAY_REQ] USER:admin -> ENDPOINT:/api/ghosint -> Q:rawr
+[RELAY_REQ] USER:admin -> ENDPOINT:/breachvip -> Q:rawr
+[RELAY_REQ] USER:admin -> ENDPOINT:/ud_breach -> Q:rawr
+[RELAY_REQ] USER:admin -> ENDPOINT:/api/ghosint -> Q:rawr
+[RELAY_REQ] USER:admin -> ENDPOINT:/api/ghosint -> Q:rawr
+[RELAY_REQ] USER:admin -> ENDPOINT:/api/d2r -> Q:1429147686929567826
+[RELAY_REQ] USER:admin -> ENDPOINT:/api/discord -> Q:1429147686929567826
+[RELAY] admin REQUESTED /dh_discord ON 1429147686929567826
+[RELAY] admin REQUESTED /dh_discord ON 1429147686929567826
+[RELAY] admin REQUESTED http://94.249.230.111:8000/dh_discord ON 1429147686929567826
+[RELAY] admin REQUESTED http://94.249.230.111:8000/ip ON 1.1.1.1
+[RELAY] admin REQUESTED /dh_discord ON 1429147686929567826
+[RELAY] admin REQUESTED /ud_breach ON rawr
+[RELAY] admin REQUESTED /check ON x@x.com
+[RELAY] admin REQUESTED /swedish ON john
+[RELAY] admin REQUESTED /person ON john
+[RELAY] admin REQUESTED /npd ON john
+[RELAY] admin REQUESTED /dh_username ON john
+[RELAY] admin REQUESTED /swedish ON john
+[RELAY] admin REQUESTED /vin ON rawr
+[RELAY] admin REQUESTED /vin ON 5J8TB3H55EL004884
+[RELAY] admin REQUESTED /plate ON AQW9965
+[RELAY] admin REQUESTED /api/ghosint ON AQW9965
+[RELAY] admin REQUESTED /api/ghosint ON rawr
+[RELAY] admin REQUESTED /ip ON 1.1.1.1
+[RELAY] admin REQUESTED /shodan/shodan/host ON 1.1.1.1
+[RELAY] admin REQUESTED /shodan/shodan/host/search ON 1.1.1.1
+[RELAY] admin REQUESTED /stealerlogs ON 1.1.1.1
+[RELAY] admin REQUESTED /doxbin ON 1.1.1.1
+[RELAY] admin REQUESTED /doxbin ON rawr
+[RELAY] admin REQUESTED /dh_roblox ON rawr
+[RELAY] admin REQUESTED /stealerlogs ON rawr
+[RELAY] admin REQUESTED /doxbin ON rawr
+[RELAY] admin REQUESTED /dh_roblox ON rawr
+[RELAY] admin REQUESTED /vin ON 5J8TB3H55EL004884
+[RELAY] admin REQUESTED /plate ON AQW9965
+[RELAY] admin REQUESTED /people ON john
+[RELAY] admin REQUESTED /dh_discord ON 1429147686929567826
+[RELAY] admin REQUESTED /ud_breach ON 1429147686929567826
+[RELAY] admin REQUESTED /ud_breach ON rawr
+[RELAY] admin REQUESTED /ud_breach ON x@x.com
+[RELAY] admin REQUESTED /swedish ON john
+[RELAY] admin REQUESTED /person ON john
+[RELAY] admin REQUESTED /npd ON john
+[RELAY] admin REQUESTED /dh_username ON john
+[RELAY] admin REQUESTED /people ON john
+[RELAY] admin REQUESTED /dh_roblox ON john
+[RELAY] admin REQUESTED /doxbin ON john
+[RELAY] admin REQUESTED /stealerlogs ON john
+[RELAY] admin REQUESTED /api/ghosint ON john
+[RELAY] admin REQUESTED /dh_roblox ON ourlastwinterdied
+[RELAY] admin REQUESTED /dh_roblox ON dtnzack
+[RELAY] admin REQUESTED /person ON dtnzack
+[RELAY] admin REQUESTED /npd ON dtnzack
+[RELAY] admin REQUESTED /person ON john
+[RELAY] admin REQUESTED /people ON john
+[RELAY] admin REQUESTED /api/ghosint ON lol
+[RELAY] admin REQUESTED /swedish ON john
+[RELAY] admin REQUESTED /shodan/shodan/host/search ON rawr
+[RELAY] admin REQUESTED /dh_discord ON 1429147686929567826
+[RELAY] admin REQUESTED /dh_roblox ON rawr
+[RELAY] admin REQUESTED /ip ON 1.1.1.1
+[RELAY] admin REQUESTED /shodan/shodan/host ON 1.1.1.1
+[RELAY] admin REQUESTED /dh_roblox ON rawr
+[RELAY] admin -> LOCAL_DISCORD_BREACH [rawr]
+[RELAY] admin -> LOCAL_DISCORD_BREACH [rawr]
+[RELAY] admin -> LOCAL_DISCORD_BREACH [rawr]
+[RELAY] admin -> LOCAL_DISCORD_BREACH [arf]

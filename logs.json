@@ -1,0 +1,16 @@
+{
+  "logins": [
+    {
+      "username": "admin",
+      "ip": "::1",
+      "time": 1772401790767
+    },
+    {
+      "username": "txt",
+      "ip": "::1",
+      "time": 1772401797364
+    }
+  ],
+  "queries": [],
+  "deletions": []
+}

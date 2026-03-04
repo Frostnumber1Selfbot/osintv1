@@ -1,0 +1,42 @@
+[2026-03-04T10:37:31.239Z] API_ERR_404: Request failed with status code 404
+[2026-03-04T10:37:33.940Z] API_ERR_404: Request failed with status code 404
+[2026-03-04T10:41:54.933Z] API_ERR_400: Request failed with status code 400
+[2026-03-04T10:41:55.784Z] API_ERR_500: Request failed with status code 500
+[2026-03-04T10:41:59.193Z] API_ERR_404: Request failed with status code 404
+[2026-03-04T10:44:28.313Z] NETWORK_TIMEOUT: timeout of 15000ms exceeded
+[2026-03-04T10:44:54.686Z] NETWORK_TIMEOUT: timeout of 15000ms exceeded
+[2026-03-04T10:47:11.158Z] API_ERR_404: Request failed with status code 404
+[2026-03-04T10:47:28.890Z] NETWORK_TIMEOUT: timeout of 15000ms exceeded
+[2026-03-04T10:48:24.372Z] API_ERR_504: Request failed with status code 504
+[2026-03-04T10:48:27.241Z] API_ERR_400: Request failed with status code 400
+[2026-03-04T10:50:55.404Z] API_ERR_404: Request failed with status code 404
+[2026-03-04T10:51:00.058Z] API_ERR_404: Request failed with status code 404
+[2026-03-04T10:53:11.211Z] API_ERR_500: Request failed with status code 500
+[2026-03-04T10:53:23.870Z] API_ERR_404: Request failed with status code 404
+[2026-03-04T10:53:26.265Z] API_ERR_404: Request failed with status code 404
+[2026-03-04T10:53:34.491Z] API_ERR_404: Request failed with status code 404
+[2026-03-04T10:53:37.312Z] API_ERR_404: Request failed with status code 404
+[2026-03-04T10:53:40.593Z] API_ERR_400: Request failed with status code 400
+[2026-03-04T10:53:45.208Z] API_ERR_400: Request failed with status code 400
+[2026-03-04T10:55:42.216Z] NETWORK_TIMEOUT: timeout of 15000ms exceeded
+[2026-03-04T11:04:10.984Z] NETWORK_TIMEOUT: timeout of 15000ms exceeded
+[2026-03-04T11:04:30.714Z] NETWORK_TIMEOUT: timeout of 15000ms exceeded
+[2026-03-04T11:05:50.264Z] NETWORK_TIMEOUT: timeout of 15000ms exceeded
+[2026-03-04T11:09:41.487Z] NETWORK_TIMEOUT: timeout of 15000ms exceeded
+[2026-03-04T11:22:38.416Z] NETWORK_TIMEOUT: timeout of 15000ms exceeded
+[2026-03-04T11:23:59.257Z] API_ERR_400: Request failed with status code 400
+[2026-03-04T11:24:05.217Z] API_ERR_400: Request failed with status code 400
+[2026-03-04T11:24:59.779Z] API_ERR_500: Request failed with status code 500
+[2026-03-04T11:25:03.432Z] API_ERR_500: Request failed with status code 500
+[2026-03-04T11:25:06.271Z] API_ERR_400: Request failed with status code 400
+[2026-03-04T11:25:14.497Z] API_ERR_500: Request failed with status code 500
+[2026-03-04T11:25:38.800Z] API_ERR_500: Request failed with status code 500
+[2026-03-04T11:25:57.316Z] NETWORK_TIMEOUT: timeout of 15000ms exceeded
+[2026-03-04T11:26:15.149Z] NETWORK_TIMEOUT: timeout of 15000ms exceeded
+[2026-03-04T11:26:26.140Z] API_ERR_400: Request failed with status code 400
+[2026-03-04T11:26:38.369Z] API_ERR_400: Request failed with status code 400
+[2026-03-04T11:55:59.643Z] API_ERR_400: Request failed with status code 400
+[2026-03-04T11:56:03.384Z] API_ERR_400: Request failed with status code 400
+[2026-03-04T12:01:25.985Z] API_ERR_400: Request failed with status code 400
+[2026-03-04T12:01:30.833Z] API_ERR_404: Request failed with status code 404
+[2026-03-04T12:02:49.084Z] NETWORK_TIMEOUT: timeout of 15000ms exceeded

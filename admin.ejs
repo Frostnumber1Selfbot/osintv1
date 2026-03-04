@@ -1,0 +1,810 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>cpanel</title>
+    <style>
+        /* * TITAN_ULTIMA DESIGN SYSTEM 
+         * V28.0 ENHANCED KERNEL STYLING
+         */
+        @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;700;800&display=swap');
+
+        :root {
+            --red: #ff0000;
+            --red-dim: #2a0000;
+            --red-glow: rgba(255, 0, 0, 0.4);
+            --bg-ultra: #020202;
+            --bg-panel: #060606;
+            --bg-card: #0a0a0a;
+            --border-main: #1a1a1a;
+            --border-heavy: #222;
+            --text-dim: #444;
+            --text-mid: #888;
+            --text-bright: #fff;
+            --font-main: 'JetBrains Mono', monospace;
+            --shadow-depth: 0 20px 60px rgba(0,0,0,0.9);
+            --transition-speed: 0.25s;
+            --neon-blue: #00f2ff;
+            --neon-green: #00ff66;
+            --neon-orange: #ff9900;
+        }
+
+        /* --- CORE ARCHITECTURE --- */
+        * {
+            box-sizing: border-box;
+            outline: none;
+            margin: 0;
+            padding: 0;
+            scrollbar-width: thin;
+            scrollbar-color: var(--red) #000;
+        }
+
+        ::-webkit-scrollbar { width: 4px; height: 4px; }
+        ::-webkit-scrollbar-track { background: #000; }
+        ::-webkit-scrollbar-thumb { background: var(--red); box-shadow: 0 0 10px var(--red); }
+
+        body {
+            background: var(--bg-ultra);
+            color: var(--text-mid);
+            font-family: var(--font-main);
+            height: 100vh;
+            overflow: hidden;
+            display: flex;
+            user-select: none;
+        }
+
+        /* --- SIDEBAR SUBSYSTEM --- */
+        .sidebar {
+            width: 320px;
+            height: 100%;
+            background: #000;
+            border-right: 1px solid var(--border-main);
+            display: flex;
+            flex-direction: column;
+            z-index: 1000;
+            position: relative;
+        }
+
+        .sidebar-brand {
+            padding: 40px 30px;
+            border-bottom: 2px solid var(--red);
+            background: linear-gradient(180deg, #110000 0%, #000 100%);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .sidebar-brand::before {
+            position: absolute;
+            top: 5px;
+            left: 30px;
+            font-size: 7px;
+            color: var(--neon-green);
+            letter-spacing: 2px;
+            font-weight: 800;
+        }
+
+        .brand-text {
+            color: #fff;
+            font-weight: 800;
+            letter-spacing: 6px;
+            font-size: 20px;
+            text-shadow: 0 0 15px var(--red-glow);
+        }
+
+        .brand-sub {
+            font-size: 9px;
+            color: var(--red);
+            letter-spacing: 2px;
+            margin-top: 5px;
+            font-weight: 700;
+            opacity: 0.8;
+        }
+
+        .nav-container { flex-grow: 1; padding: 20px 0; overflow-y: auto; }
+
+        .nav-section-label {
+            font-size: 9px;
+            color: var(--text-dim);
+            padding: 25px 30px 10px;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            font-weight: 800;
+        }
+
+        .nav-item {
+            padding: 16px 30px;
+            font-size: 11px;
+            color: var(--text-mid);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            transition: all var(--transition-speed);
+            border-left: 0px solid var(--red);
+        }
+
+        .nav-item:hover { background: #080000; color: #fff; padding-left: 35px; }
+        .nav-item.active {
+            background: linear-gradient(90deg, #1a0000 0%, #000 100%);
+            color: var(--red);
+            border-left: 4px solid var(--red);
+            font-weight: 700;
+        }
+
+        /* --- TELEMETRY WIDGETS --- */
+        .status-footer { padding: 25px; background: #030303; border-top: 1px solid var(--border-main); }
+        .tele-row { display: flex; justify-content: space-between; margin-bottom: 8px; font-size: 9px; font-weight: 800; letter-spacing: 1px; }
+        .tele-bar-bg { background: #0a0a0a; height: 2px; width: 100%; overflow: hidden; margin-bottom: 12px; }
+        .tele-bar-fill { background: var(--red); height: 100%; transition: width 0.8s cubic-bezier(0.4, 0, 0.2, 1); box-shadow: 0 0 10px var(--red); }
+
+        /* --- STAGE & VIEWPORTS --- */
+        .main-stage {
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            background: radial-gradient(circle at 50% 50%, #050000 0%, #020202 100%);
+            overflow: hidden;
+        }
+
+        .top-monitor {
+            height: 70px;
+            border-bottom: 1px solid var(--border-main);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 40px;
+            background: rgba(0,0,0,0.8);
+            backdrop-filter: blur(15px);
+            z-index: 500;
+        }
+
+        .view-port { flex-grow: 1; overflow-y: auto; padding: 40px; display: none; }
+        .view-port.active { display: block; animation: titanFade 0.6s cubic-bezier(0.16, 1, 0.3, 1); }
+
+        @keyframes titanFade {
+            from { opacity: 0; filter: blur(20px); transform: translateY(20px); }
+            to { opacity: 1; filter: blur(0); transform: translateY(0); }
+        }
+
+        /* --- UI COMPONENTS: CARDS --- */
+        .card-row {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-main);
+            padding: 25px;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .card:hover { transform: translateY(-5px); border-color: var(--red); box-shadow: 0 10px 40px rgba(255,0,0,0.05); }
+
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, var(--red), transparent);
+            transform: translateX(-100%);
+            transition: 0.5s;
+        }
+
+        .card:hover::before { transform: translateX(100%); }
+
+        .card-label { font-size: 9px; letter-spacing: 2px; color: var(--text-dim); margin-bottom: 12px; display: block; font-weight: 800; text-transform: uppercase; }
+        .card-value { font-size: 36px; font-weight: 800; color: #fff; letter-spacing: -1px; }
+        .card-meta { font-size: 10px; color: var(--red); margin-top: 8px; font-weight: 700; text-transform: uppercase; display: flex; align-items: center; gap: 5px; }
+
+        /* --- UI COMPONENTS: PANELS --- */
+        .panel {
+            background: #000;
+            border: 1px solid var(--border-heavy);
+            padding: 30px;
+            margin-bottom: 30px;
+            position: relative;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+        }
+
+        .panel-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 25px;
+            border-bottom: 1px solid #111;
+            padding-bottom: 15px;
+        }
+
+        .panel-title {
+            font-size: 12px;
+            font-weight: 800;
+            color: #fff;
+            letter-spacing: 3px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            text-transform: uppercase;
+        }
+
+        .panel-title::before { content: ''; width: 4px; height: 14px; background: var(--red); display: inline-block; }
+
+        /* --- DATA TABLES --- */
+        .table-scroll { width: 100%; overflow-x: auto; border: 1px solid #111; background: #000; }
+        table { width: 100%; border-collapse: collapse; }
+        th { background: #080808; padding: 18px 20px; text-align: left; color: #444; font-size: 9px; letter-spacing: 2px; text-transform: uppercase; font-weight: 800; border-bottom: 2px solid #111; }
+        td { padding: 16px 20px; border-bottom: 1px solid #080808; font-size: 11px; color: #999; transition: 0.2s; }
+        tr:hover td { background: #050000; color: #fff; }
+
+        .badge {
+            padding: 5px 12px;
+            font-size: 8px;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            border-radius: 2px;
+        }
+        .status-active { background: rgba(0,255,100,0.05); color: var(--neon-green); border: 1px solid rgba(0,255,100,0.2); }
+        .status-locked { background: rgba(255,0,0,0.05); color: var(--red); border: 1px solid rgba(255,0,0,0.2); }
+        .status-pending { background: rgba(0,242,255,0.05); color: var(--neon-blue); border: 1px solid rgba(0,242,255,0.2); }
+
+        /* --- FORM & INPUTS --- */
+        .input-row { display: flex; gap: 15px; align-items: flex-end; flex-wrap: wrap; margin-bottom: 15px; }
+        .field-group { flex: 1; display: flex; flex-direction: column; gap: 8px; min-width: 180px; }
+        label { font-size: 9px; color: #555; font-weight: 800; text-transform: uppercase; letter-spacing: 2px; }
+        
+        input, select, textarea {
+            background: #050505;
+            border: 1px solid #1a1a1a;
+            color: #fff;
+            padding: 15px;
+            font-family: var(--font-main);
+            font-size: 11px;
+            transition: all 0.2s;
+        }
+        input:focus { border-color: var(--red); background: #0a0000; box-shadow: 0 0 20px rgba(255,0,0,0.1); }
+
+        .btn {
+            background: var(--red);
+            color: #fff;
+            border: none;
+            padding: 15px 30px;
+            font-weight: 800;
+            text-transform: uppercase;
+            font-size: 10px;
+            cursor: pointer;
+            letter-spacing: 2px;
+            transition: 0.4s;
+            font-family: inherit;
+            position: relative;
+            overflow: hidden;
+        }
+        .btn:hover { background: #cc0000; letter-spacing: 4px; }
+        .btn-ghost {
+            background: transparent;
+            border: 1px solid #222;
+            color: #666;
+            padding: 10px 20px;
+            font-size: 9px;
+            font-weight: 800;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+        .btn-ghost:hover { border-color: var(--red); color: #fff; background: #0a0000; }
+
+        /* --- TOAST SYSTEM --- */
+        #toast-container { position: fixed; bottom: 40px; right: 40px; z-index: 9999; display: flex; flex-direction: column; gap: 15px; }
+        .toast {
+            background: #000;
+            border-left: 4px solid var(--red);
+            padding: 20px 40px;
+            color: #fff;
+            font-size: 11px;
+            font-weight: 800;
+            letter-spacing: 2px;
+            box-shadow: 0 15px 50px rgba(0,0,0,0.8);
+            animation: slideIn 0.5s cubic-bezier(0.23, 1, 0.32, 1) forwards;
+        }
+        @keyframes slideIn { from { transform: translateX(120%); opacity: 0; } to { transform: translateX(0); opacity: 1; } }
+
+        /* --- ANALYTICS HUB --- */
+        .stat-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 15px; margin-top: 25px; }
+        .stat-item { background: #050505; border: 1px solid #111; padding: 20px; text-align: center; border-bottom: 2px solid transparent; transition: 0.3s; }
+        .stat-item:hover { border-bottom-color: var(--red); background: #080808; }
+        .stat-label { font-size: 9px; color: #444; margin-bottom: 10px; letter-spacing: 2px; font-weight: 800; }
+        .stat-value { font-size: 28px; color: #fff; font-weight: 800; }
+
+        /* --- LOGGING BUFFER --- */
+        .log-buffer { height: 500px; background: #000; border: 1px solid #111; padding: 25px; overflow-y: auto; font-size: 10px; line-height: 2; font-family: 'JetBrains Mono'; }
+        .log-line { display: flex; gap: 20px; border-bottom: 1px solid #080808; padding: 8px 0; }
+        .log-ts { color: #333; }
+        .log-tag { color: var(--red); font-weight: 800; min-width: 100px; }
+        .log-msg { color: #777; }
+
+        /* --- MISC UTILS --- */
+        .flex-sep { display: flex; justify-content: space-between; align-items: center; width: 100%; }
+        .glow-text { text-shadow: 0 0 10px var(--red-glow); }
+        .hidden { display: none; }
+    </style>
+</head>
+<body>
+
+    <div id="toast-container"></div>
+
+    <aside class="sidebar">
+        <div class="sidebar-brand">
+            <div class="brand-text">cpanel</div>
+            <div class="brand-sub">All staff are trusted.</div>
+        </div>
+
+        <nav class="nav-container">
+            <div class="nav-section-label">Core Infrastructure</div>
+            <div class="nav-item active" onclick="switchView('view-overview', this)">
+                <span>Stats</span>
+            </div>
+            <div class="nav-item" onclick="switchView('view-operators', this)">
+                <span>Create User</span>
+            </div>
+            <div class="nav-item" onclick="switchView('view-licenses', this)">
+                <span>Active Licenses</span>
+            </div>
+
+            <div class="nav-section-label">Intel & Security</div>
+            <div class="nav-item" onclick="switchView('view-logs', this)">
+                <span>Audit Logs</span>
+            </div>
+            <div class="nav-item" onclick="switchView('view-analytics', this)">
+                <span>Analytics</span>
+            </div>
+            <div class="nav-item" onclick="switchView('view-security', this)">
+                <span>Staff TOS</span>
+            </div>
+
+            <div class="nav-section-label">Session Control</div>
+            <div class="nav-item" onclick="window.location.href='/dashboard'">
+                <span>Back to dashboard</span>
+            </div>
+            <div class="nav-item" style="color:var(--red)" onclick="triggerAbort()">
+                <span>Log Out</span>
+            </div>
+        </nav>
+
+        <div class="status-footer">
+            <div class="tele-row"><span>Server CPU</span><span id="load-txt">0%</span></div>
+            <div class="tele-bar-bg"><div class="tele-bar-fill" id="load-bar" style="width: 0%"></div></div>
+            <div class="tele-row"><span>Memory Page</span><span id="mem-txt">0MB</span></div>
+            <div class="tele-bar-bg"><div class="tele-bar-fill" id="mem-bar" style="width: 0%; background: #333;"></div></div>
+            <div class="tele-row"><span>Latency</span><span id="ping-txt">12ms</span></div>
+        </div>
+    </aside>
+
+    <main class="main-stage">
+        <header class="top-monitor">
+            <div style="font-size: 10px; font-weight: 800; letter-spacing: 2px;">
+                Status: <span style="color:var(--neon-green)" class="glow-text">Secure connection</span>
+            </div>
+            <div id="digital-clock" style="color: #fff; font-weight: 800; font-size: 16px; letter-spacing: 4px;">00:00:00</div>
+            <div style="font-size: 10px; font-weight: 800; letter-spacing: 2px;">
+                ADMIN_LEVEL: <span style="color:var(--red)">ROOT_LEVEL_7</span>
+            </div>
+        </header>
+
+        <div id="view-overview" class="view-port active">
+            <div class="card-row">
+                <div class="card">
+                    <span class="card-label">Total Users</span>
+                    <span class="card-value"><%= users.length %></span>
+                    <div class="card-meta"><span>&#9679;</span> Current Users</div>
+                </div>
+                <div class="card">
+                    <span class="card-label">Active/Pending Keys</span>
+                    <span class="card-value"><%= keys.filter(k => !k.used).length %></span>
+                    <div class="card-meta" style="color:var(--neon-blue)"><span>&#9679;</span> Available</div>
+                </div>
+                <div class="card">
+                    <span class="card-label">Uptime</span>
+                    <span class="card-value"><%= metrics.uptime %>m</span>
+                    <div class="card-meta" style="color:var(--neon-green)"><span>&#9679;</span> Uptime Monitor</div>
+                </div>
+                <div class="card">
+                    <span class="card-label">Modules</span>
+                    <span class="card-value"><%= metrics.active_threads %></span>
+                    <div class="card-meta"><span>&#9679;</span> Active Modules</div>
+                </div>
+            </div>
+
+            <div class="panel">
+                <div class="panel-header"><div class="panel-title">Extend Everyones License</div></div>
+                <div class="input-row">
+                    <div class="field-group">
+                        <label>Extension Ticks (Days)</label>
+                        <input type="number" id="bulkDays" value="7">
+                    </div>
+                    <button class="btn" onclick="adminAction('EXTEND_ALL', null, null, document.getElementById('bulkDays').value)">Apply</button>
+                    <button class="btn" style="background: #cc6600;" onclick="adminAction('PURGE_EXPIRED')">Delete Expired Users</button>
+                </div>
+            </div>
+
+            <div class="panel">
+                <div class="panel-header"><div class="panel-title">Environment Telemetry</div></div>
+                <div style="display:grid; grid-template-columns: 1fr 1fr; gap: 40px;">
+                    <div style="font-size: 11px; color: #666; line-height: 2.5;">
+                        <div class="flex-sep"><span>Servers</span><span style="color:#fff"><%= metrics.os_kernel %></span></div>
+                        <div class="flex-sep"><span>Server Memory</span><span style="color:#fff"><%= metrics.mem_rss %></span></div>
+                        <div class="flex-sep"><span>Space Used</span><span style="color:#fff"><%= metrics.mem_heap %></span></div>
+                    </div>
+                    <div style="font-size: 11px; color: #666; line-height: 2.5;">
+                        <div class="flex-sep"><span>Server</span><span style="color:#fff">Apache/2.4</span></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="view-operators" class="view-port">
+            <div class="panel">
+                <div class="panel-header"><div class="panel-title">Manually Generate Account</div></div>
+                <div class="input-row">
+                    <div class="field-group"><label>Username</label><input type="text" id="op_user" placeholder="..."></div>
+                    <div class="field-group"><label>Password</label><input type="password" id="op_pass" value="123"></div>
+                    <div class="field-group" style="max-width: 120px;"><label>TTL</label><input type="number" id="op_days" value="30"></div>
+                    <button class="btn" onclick="provisionUser()">Generate Accoumnt</button>
+                </div>
+            </div>
+
+            <div class="panel">
+                <div class="panel-header">
+                    <div class="panel-title">Registered Users(<%= users.length %> Units)</div>
+                    <input type="text" id="opSearch" placeholder="SEARCH_BY_ID..." onkeyup="searchTable('opTable', 'opSearch')" style="width: 350px;">
+                </div>
+                <div class="table-scroll">
+                    <table id="opTable">
+                        <thead>
+                            <tr>
+                                <th>Username</th>
+                                <th>HEARTBEAT</th>
+                                <th>PRIVILEGE</th>
+                                <th>EXPIRY_TIMESTAMP</th>
+                                <th>KERNEL_ACCESS</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <% users.forEach(u => { %>
+                                <tr>
+                                    <td style="color:#fff; font-weight:800; letter-spacing:1px;"><%= u.username %></td>
+                                    <td><span class="badge <%= u.locked ? 'status-locked' : 'status-active' %>"><%= u.locked ? 'LOCKED' : 'LOCK' %></span></td>
+                                    <td><%= u.role.toUpperCase() %></td>
+                                    <td><%= new Date(u.expiry).toLocaleDateString() %></td>
+                                    <td>
+                                        <% if (u.username !== 'admin') { %>
+                                            <button class="btn-ghost" onclick="adminAction('TOGGLE_LOCK', '<%= u.username %>')">TOGGLE_BIT</button>
+                                            <button class="btn-ghost" onclick="resetPassword('<%= u.username %>')">RESET_PW</button>
+                                            <button class="btn-ghost" style="color:var(--red)" onclick="adminAction('DELETE_USER', '<%= u.username %>')">PURGE</button>
+                                        <% } else { %>
+                                            <span style="color:#333; font-size:9px; font-weight:800;">ROOT_PROTECTED</span>
+                                        <% } %>
+                                    </td>
+                                </tr>
+                            <% }) %>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <div id="view-licenses" class="view-port">
+            <div class="panel">
+                <div class="panel-header">
+                    <div class="panel-title">Generate License</div>
+                    <div class="input-row">
+                        <select id="shardPlan" style="width: 250px;">
+                            <option value="day">24 Hour</option>
+                            <option value="week">7 Days</option>
+                            <option value="month" selected>30 Days</option>
+                            <option value="year">365 Days</option>
+                            <option value="lifetime">Infinite</option>
+                        </select>
+                        <button class="btn" onclick="adminAction('GEN_KEY', null, document.getElementById('shardPlan').value)">Compile Key</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="panel">
+                <div class="panel-header">
+                    <div class="panel-title">Active Licenses (<%= keys.length %> Total)</div>
+                    <input type="text" id="keySearch" placeholder="SEARCH_LICENSE_KEY..." onkeyup="searchTable('keyTable', 'keySearch')" style="width: 350px;">
+                </div>
+                <div class="table-scroll">
+                    <table id="keyTable">
+                        <thead>
+                            <tr>
+                                <th>License Key</th>
+                                <th>Tier</th>
+                                <th>State</th>
+                                <th>Generate By</th>
+                                <th>Time Stamp</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <% keys.forEach(k => { %>
+                                <tr>
+                                    <td style="color:var(--neon-orange); font-family: 'JetBrains Mono'; font-weight:700;"><%= k.key %></td>
+                                    <td><%= k.plan.toUpperCase() %></td>
+                                    <td><span class="badge <%= k.used ? 'status-locked' : 'status-active' %>"><%= k.used ? 'Used' : 'Ready' %></span></td>
+                                    <td><%= k.genBy || 'SYSTEM' %></td>
+                                    <td><%= new Date(k.ts).toLocaleString() %></td>
+                                    <td><button class="btn-ghost" style="color:var(--red)" onclick="adminAction('DELETE_KEY', '<%= k.key %>')">Delete Key</button></td>
+                                </tr>
+                            <% }) %>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <div id="view-logs" class="view-port">
+            <div class="panel">
+                <div class="panel-header">
+                    <div class="panel-title">Audit Log</div>
+                    <button class="btn-ghost" onclick="clearLogDisplay()">Clear Audit</button>
+                </div>
+                <div class="log-buffer" id="log-buffer">
+                    <% if (audit && audit.length > 0) { %>
+                        <% audit.forEach(log => { %>
+                            <div class="log-line">
+                                <span class="log-ts">[<%= log.timestamp %>]</span>
+                                <span class="log-tag">#<%= log.action %></span>
+                                <span class="log-msg"><strong style="color:#eee"><%= log.admin %></strong> targeting <strong style="color:var(--red)"><%= log.target %></strong> from IP <span style="color:cyan"><%= log.ip %></span></span>
+                            </div>
+                        <% }) %>
+                    <% } else { %>
+                        <div style="height:100%; display:flex; align-items:center; justify-content:center; opacity:0.1; font-size:40px; font-weight:800; letter-spacing:20px;">EMPTY_BUFFER</div>
+                    <% } %>
+                </div>
+            </div>
+        </div>
+
+        <div id="view-analytics" class="view-port">
+            <div class="panel">
+                <div class="panel-header"><div class="panel-title">Intelligence Statistics</div></div>
+                <div class="stat-grid">
+                    <div class="stat-item">
+                        <div class="stat-label">Total Users</div>
+                        <div class="stat-value"><%= users.length %></div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-label">Active Licenses</div>
+                        <div class="stat-value"><%= users.filter(u => !u.locked && Date.now() < u.expiry).length %></div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-label">Locked accounts</div>
+                        <div class="stat-value"><%= users.filter(u => u.locked).length %></div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-label">Keys in stock</div>
+                        <div class="stat-value"><%= keys.filter(k => !k.used).length %></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="panel">
+                <div class="panel-header"><div class="panel-title">Tier Distributed License Keys</div></div>
+                <div style="padding: 20px;">
+                    <% 
+                    const keysByPlan = {};
+                    keys.forEach(k => { keysByPlan[k.plan] = (keysByPlan[k.plan] || 0) + 1; });
+                    Object.entries(keysByPlan).forEach(([plan, count]) => { 
+                    %>
+                        <div style="margin-bottom: 25px;">
+                            <div class="flex-sep" style="margin-bottom: 8px; font-size: 10px; font-weight:800;">
+                                <span style="text-transform:uppercase;"><%= plan %></span>
+                                <span style="color:var(--red);"><%= count %> UNITS</span>
+                            </div>
+                            <div style="height:4px; background:#111; width:100%; position:relative;">
+                                <div style="height:100%; background:var(--red); width: <%= (count / keys.length * 100) %>%; box-shadow: 0 0 10px var(--red);"></div>
+                            </div>
+                        </div>
+                    <% }); %>
+                </div>
+            </div>
+        </div>
+
+        <div id="view-security" class="view-port">
+            <div class="panel">
+                <div class="panel-header"><div class="panel-title">Staff Notice</div></div>
+                <div style="padding: 40px; text-align:center;">
+                    <div style="color:var(--red); font-size: 60px; margin-bottom: 20px;">&#9888;</div>
+                    <h2 style="color:#fff; margin-bottom: 15px; letter-spacing:2px;">IMPORTANT NOTICE</h2>
+                    <p style="color:#555; font-size:12px; max-width: 600px; margin: 0 auto; line-height:2;">
+
+<br></br>
+                        1. Authorized Access Only
+Access Credentials: Your login credentials are for your sole use. You are prohibited from sharing your username, password, or API keys with anyone, including other employees.
+Account Security: You are responsible for all actions taken under your credentials. If you suspect a security breach, you must report it to [IT/Security Email] immediately.
+Inactive Sessions: You must log out of the Portal when your workstation is unattended.
+
+<br></br>
+2. Confidentiality and Data Protection
+Confidential Information: As a user of the admin panel, you will have access to sensitive information, including user data, financial details, and proprietary company information. This data must be kept strictly confidential.
+Data Handling: You may not download, export, copy, or distribute user data (including PII - Personally Identifiable Information) unless it is explicitly required for your job function.
+No Unauthorized Sharing: You may not disclose any information obtained through the Portal to unauthorized third parties or unauthorized staff members.
+
+<br></br>
+3. Permitted Usage
+Scope of Authority: You may only use the Portal within the scope of your assigned job role and permissions. Do not attempt to access areas of the portal for which you do not have permission.
+System Integrity: You must not knowingly enter false, malicious, or corrupt data into the system. You must not use the Portal for personal, non-work-related tasks.
+Compliance: You must follow all company policies and, where applicable, regulatory requirements (e.g., GDPR, HIPAA) when handling data in the portal.
+
+<br></br>
+4. Monitoring and Compliance
+Monitoring: [Company Name] reserves the right to monitor, audit, and log all activities, actions, and data access performed within the Portal. You have no expectation of privacy when using this internal tool.
+Policy Violations: If a violation of this agreement occurs, [Company Name] may, at its discretion, revoke access immediately and take disciplinary action.
+
+<br></br>
+5. Termination of Access
+Offboarding: Upon termination or resignation of employment, your access to the Portal will be deactivated immediately.
+Immediate Revocation: Access may be terminated immediately if you are found to be in breach of this policy, or if your job role no longer requires access.
+6. Acceptance
+By clicking "I Agree" or logging into the Portal, you acknowledge that you have read, understood, and agreed to this Staff Terms of Service.
+                    <button class="btn" style="margin-top: 30px;" disabled>I Agree</button>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script>
+
+        function switchView(viewId, element) {
+            document.querySelectorAll('.view-port').forEach(v => v.classList.remove('active'));
+            document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
+
+            document.getElementById(viewId).classList.add('active');
+            element.classList.add('active');
+            
+            pushToast(`System${viewId.replace('view-', '').toUpperCase()}`);
+        }
+
+        /**
+         * Triggers an asynchronous administrative action to the backend [cite: 373, 376]
+         */
+        async function adminAction(action, target = null, planType = null, customDays = null) {
+            // Confirmations for destructive actions [cite: 374, 375]
+            if (['DELETE_USER', 'DELETE_KEY'].includes(action) && !confirm("you sure nigga?")) return;
+            if (action === 'PURGE_EXPIRED' && !confirm("you sure nigga?")) return;
+
+            try {
+                const res = await fetch('/api/admin/action', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ action, target, planType, customDays })
+                });
+                
+                const data = await res.json();
+
+                if (data.success) {
+                    pushToast("DATABASE_FLUSH_COMPLETE");
+                    // Delay and cache-bust reload 
+                    setTimeout(() => {
+                        window.location.href = window.location.pathname + "?v=" + Date.now();
+                    }, 1200);
+                } else {
+                    pushToast(`FAILURE_CODE: ${data.error}`, true);
+                }
+            } catch (err) {
+                pushToast("Failed", true);
+            }
+        }
+
+        /**
+         * Handles the manual provisioning of a new user identity [cite: 381, 384]
+         */
+        async function provisionUser() {
+            const target = document.getElementById('op_user').value.trim();
+            const customPass = document.getElementById('op_pass').value;
+            const customDays = document.getElementById('op_days').value;
+
+            if (!target) return pushToast("IDENTIFIER_MISSING", true);
+
+            try {
+                const res = await fetch('/api/admin/action', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ action: 'CREATE_CUSTOM_USER', target, customDays, customPass })
+                });
+                
+                const data = await res.json();
+                if (data.success) {
+                    pushToast("IDENTITY_PROVISIONED_SUCCESSFULLY");
+                    setTimeout(() => window.location.reload(), 800);
+                } else {
+                    pushToast(`PROVISION_FAILED: ${data.error}`, true);
+                }
+            } catch (err) {
+                pushToast("PROVISION_EXCEPTION: HALTED", true);
+            }
+        }
+
+        /**
+         * Administrative password reset prompt [cite: 388]
+         */
+        function resetPassword(username) {
+            const newPass = prompt(`ASSIGN_NEW_SECRET_FOR [${username}]:`);
+            if (newPass) adminAction('RESET_PASS', username, null, newPass);
+        }
+
+        /**
+         * Reactive table filtering based on user input [cite: 390]
+         */
+        function searchTable(tableId, inputId) {
+            const filter = document.getElementById(inputId).value.toUpperCase();
+            const rows = document.getElementById(tableId).getElementsByTagName("tr");
+            for (let i = 1; i < rows.length; i++) {
+                const text = rows[i].textContent || rows[i].innerText;
+                rows[i].style.display = text.toUpperCase().includes(filter) ? "" : "none";
+            }
+        }
+
+        /**
+         * Clears the visual log buffer [cite: 392]
+         */
+        function clearLogDisplay() {
+            document.getElementById('log-buffer').innerHTML = '<div style="height:100%; display:flex; align-items:center; justify-content:center; opacity:0.1; font-size:40px; font-weight:800; letter-spacing:20px;">BUFFER_CLEARED</div>';
+        }
+
+        /**
+         * Pushes a stylized toast notification to the screen [cite: 368, 369]
+         */
+        function pushToast(msg, isError = false) {
+            const container = document.getElementById('toast-container');
+            const toast = document.createElement('div');
+            toast.className = 'toast';
+            if (isError) toast.style.borderLeftColor = 'orange';
+            toast.innerText = `> ${msg}`;
+            container.appendChild(toast);
+            setTimeout(() => {
+                toast.style.opacity = '0';
+                setTimeout(() => toast.remove(), 500);
+            }, 4000);
+        }
+
+        /**
+         * Real-time system telemetry simulation [cite: 370, 371]
+         */
+        function updateTelemetry() {
+            const cpu = Math.floor(Math.random() * (22 - 8 + 1) + 8);
+            const mem = Math.floor(Math.random() * (115 - 90 + 1) + 90);
+            const ping = Math.floor(Math.random() * (18 - 11 + 1) + 11);
+
+            document.getElementById('load-txt').innerText = `${cpu}%`;
+            document.getElementById('load-bar').style.width = `${cpu}%`;
+            document.getElementById('mem-txt').innerText = `${mem}MB`;
+            document.getElementById('mem-bar').style.width = `${(mem/256)*100}%`;
+            document.getElementById('ping-txt').innerText = `${ping}ms`;
+
+            document.getElementById('digital-clock').innerText = new Date().toLocaleTimeString('en-US', { hour12: false });
+        }
+        setInterval(updateTelemetry, 2500);
+        updateTelemetry();
+
+        /**
+         * Emergency abort sequence
+         */
+        function triggerAbort() {
+            if (confirm("Logging out so soon?")) {
+                window.location.href = '/logout';
+            }
+        }
+
+        // Initialize first toast
+        window.onload = () => pushToast("Panel Ready");
+    </script>
+</body>
+</html>

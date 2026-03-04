@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Osinting // TOS</title>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        :root { --blood: #ff0000; --bg: #000; --dim: #111; }
+        body { background: var(--bg); color: #fff; font-family: 'JetBrains Mono', monospace; display: flex; align-items: center; justify-content: center; padding: 20px; margin: 0; }
+        .legal-card { width: 600px; border: 1px solid var(--dim); padding: 40px; background: #050505; max-height: 80vh; overflow-y: auto; }
+        .brand { color: var(--blood); font-weight: 900; letter-spacing: 3px; margin-bottom: 20px; font-size: 18px; border-bottom: 1px solid var(--blood); padding-bottom: 10px; }
+        
+        h3 { font-size: 12px; color: var(--blood); text-transform: uppercase; margin-top: 25px; }
+        p, li { font-size: 11px; color: #888; line-height: 1.6; }
+        .highlight { color: #fff; font-weight: bold; }
+
+        .footer-links { margin-top: 30px; border-top: 1px solid var(--dim); padding-top: 20px; text-align: center; }
+        .btn-return { background: var(--blood); color: #fff; border: none; padding: 10px 20px; font-family: inherit; font-size: 10px; cursor: pointer; text-transform: uppercase; text-decoration: none; display: inline-block; }
+        
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar { width: 4px; }
+        ::-webkit-scrollbar-track { background: #000; }
+        ::-webkit-scrollbar-thumb { background: var(--blood); }
+    </style>
+</head>
+<body>
+    <div class="legal-card">
+        <div class="brand">OSINTING.INFO TOS</div>
+        
+        <section>
+            <h3>1. USAGE NOTICE</h3>
+            <p>Osinting.info is a data-aggregation tool intended for <span class="highlight">educational and research purposes only</span>. By accessing this service, you agree that you are solely responsible for compliance with your local, state, and federal laws.</p>
+        </section>
+
+        <section>
+            <h3>2. ZERO RELIABILITY</h3>
+            <p>The developers, administrators, and affiliates of Osinting.info provide this service <span class="highlight">"AS IS"</span>. We are <span class="highlight">NOT reliable</span> for any damages, legal repercussions, or personal consequences resulting from the use or misuse of this software.</p>
+        </section>
+
+        <section>
+            <h3>3. USER MISCONDUCT</h3>
+            <p>Unauthorized distribution of accounts, API keys, or internal dashboard screenshots will result in an immediate and permanent <span class="highlight">ACCOUNT LOCK</span>. We do not store logs of specific queries, but we monitor for automated scraping attempts, as well to see if you've leaked your access license.</p>
+        </section>
+
+        <section>
+            <h3>4. USER PRIVACY</h3>
+            <p>We do not store logs of personal information regarding emails, physical IP address's therefore we have nothing to hand over.</p>
+        </section>
+
+        <div class="footer-links">
+            <a href="/login" class="btn-return">Acknowledge & Return</a>
+        </div>
+    </div>
+</body>
+</html>

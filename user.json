@@ -1,0 +1,200 @@
+{
+    "users": [
+        {
+            "username": "admin",
+            "password": "123",
+            "role": "admin",
+            "locked": false,
+            "expiry": 4102444800000
+        },
+        {
+            "username": "txt",
+            "role": "user",
+            "locked": false,
+            "expiry": 1775203928723
+        }
+    ],
+    "pending_keys": [],
+    "audit": [
+        {
+            "id": "9E7F7C22",
+            "timestamp": "3/4/2026, 7:48:34 AM",
+            "admin": "admin",
+            "action": "LOCK_TOGGLE",
+            "target": "txt",
+            "pass": "N/A",
+            "ip": "127.0.0.1",
+            "status": "SUCCESS"
+        },
+        {
+            "id": "6E554CF6",
+            "timestamp": "3/4/2026, 7:48:25 AM",
+            "admin": "admin",
+            "action": "LOCK_TOGGLE",
+            "target": "txt",
+            "pass": "N/A",
+            "ip": "127.0.0.1",
+            "status": "SUCCESS"
+        },
+        {
+            "id": "1BFEEFBE",
+            "timestamp": "3/4/2026, 7:48:14 AM",
+            "admin": "admin",
+            "action": "PASS_RESET",
+            "target": "txt",
+            "pass": "N/A",
+            "ip": "127.0.0.1",
+            "status": "SUCCESS"
+        },
+        {
+            "id": "D41BC2AD",
+            "timestamp": "3/4/2026, 7:47:56 AM",
+            "admin": "admin",
+            "action": "PASS_RESET",
+            "target": "txt",
+            "pass": "N/A",
+            "ip": "127.0.0.1",
+            "status": "SUCCESS"
+        },
+        {
+            "id": "407351A4",
+            "timestamp": "3/4/2026, 7:41:25 AM",
+            "admin": "admin",
+            "action": "KEY_PURGE",
+            "target": "TITAN-DB2BAF3E",
+            "pass": "N/A",
+            "ip": "127.0.0.1",
+            "status": "SUCCESS"
+        },
+        {
+            "id": "47266388",
+            "timestamp": "3/4/2026, 7:41:16 AM",
+            "admin": "admin",
+            "action": "BULK_PURGE",
+            "target": "0 Users",
+            "pass": "N/A",
+            "ip": "127.0.0.1",
+            "status": "SUCCESS"
+        },
+        {
+            "id": "E8C329A9",
+            "timestamp": "3/4/2026, 7:31:37 AM",
+            "admin": "admin",
+            "action": "KEY_GEN",
+            "target": "TITAN-DB2BAF3E",
+            "pass": "N/A",
+            "ip": "127.0.0.1",
+            "status": "SUCCESS"
+        },
+        {
+            "id": "540F4D00",
+            "timestamp": "3/4/2026, 7:31:02 AM",
+            "admin": "admin",
+            "action": "KEY_PURGE",
+            "target": "TITAN-D4EEAE65",
+            "pass": "N/A",
+            "ip": "127.0.0.1",
+            "status": "SUCCESS"
+        },
+        {
+            "id": "FEF416EE",
+            "timestamp": "3/4/2026, 7:28:25 AM",
+            "admin": "admin",
+            "action": "KEY_GEN",
+            "target": "TITAN-D4EEAE65",
+            "pass": "N/A",
+            "ip": "127.0.0.1",
+            "status": "SUCCESS"
+        },
+        {
+            "id": "4B59C828",
+            "timestamp": "3/4/2026, 7:11:02 AM",
+            "admin": "admin",
+            "action": "LOCK_TOGGLE",
+            "target": "txt",
+            "pass": "N/A",
+            "ip": "127.0.0.1",
+            "status": "SUCCESS"
+        },
+        {
+            "id": "9D4B66B6",
+            "timestamp": "3/4/2026, 7:10:56 AM",
+            "admin": "admin",
+            "action": "LOCK_TOGGLE",
+            "target": "txt",
+            "pass": "N/A",
+            "ip": "127.0.0.1",
+            "status": "SUCCESS"
+        },
+        {
+            "id": "9d2718e3",
+            "timestamp": "3/4/2026, 3:32:46 AM",
+            "admin": "admin",
+            "action": "USER_WIPE",
+            "target": "rawr",
+            "pass": "N/A",
+            "ip": "127.0.0.1",
+            "status": "SUCCESS"
+        },
+        {
+            "id": "ab896bea",
+            "timestamp": "3/4/2026, 3:32:37 AM",
+            "admin": "admin",
+            "action": "MANUAL_INJECT",
+            "target": "rawr",
+            "pass": "123rawr",
+            "ip": "127.0.0.1",
+            "status": "SUCCESS"
+        },
+        {
+            "id": "492075e0",
+            "timestamp": "3/4/2026, 3:32:18 AM",
+            "admin": "admin",
+            "action": "LOCK_TOGGLE",
+            "target": "txt",
+            "pass": "N/A",
+            "ip": "127.0.0.1",
+            "status": "SUCCESS"
+        },
+        {
+            "id": "6950d335",
+            "timestamp": "3/4/2026, 3:32:10 AM",
+            "admin": "admin",
+            "action": "LOCK_TOGGLE",
+            "target": "txt",
+            "pass": "N/A",
+            "ip": "127.0.0.1",
+            "status": "SUCCESS"
+        },
+        {
+            "id": "c3a05716",
+            "timestamp": "3/4/2026, 3:12:08 AM",
+            "admin": "admin",
+            "action": "MANUAL_INJECT",
+            "target": "txt",
+            "pass": "txt",
+            "ip": "127.0.0.1",
+            "status": "SUCCESS"
+        },
+        {
+            "id": "6666bf46",
+            "timestamp": "3/4/2026, 3:10:57 AM",
+            "admin": "admin",
+            "action": "KEY_PURGE",
+            "target": "TITAN-B1FF6032",
+            "pass": "N/A",
+            "ip": "127.0.0.1",
+            "status": "SUCCESS"
+        },
+        {
+            "id": "b9e329cc",
+            "timestamp": "3/4/2026, 3:10:47 AM",
+            "admin": "admin",
+            "action": "KEY_GEN",
+            "target": "TITAN-B1FF6032",
+            "pass": "N/A",
+            "ip": "127.0.0.1",
+            "status": "SUCCESS"
+        }
+    ]
+}

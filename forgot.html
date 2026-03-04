@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Osinting // Recovery</title>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        :root { --blood: #ff0000; --bg: #000; --dim: #111; }
+        body { background: var(--bg); color: #fff; font-family: 'JetBrains Mono', monospace; display: flex; align-items: center; justify-content: center; height: 100vh; margin: 0; }
+        .recovery-card { width: 400px; border: 1px solid var(--blood); padding: 40px; background: #080000; text-align: center; }
+        .icon { color: var(--blood); font-size: 40px; margin-bottom: 20px; }
+        .brand { color: #fff; font-weight: 900; letter-spacing: 2px; margin-bottom: 10px; font-size: 16px; }
+        
+        p { font-size: 11px; color: #ccc; line-height: 1.8; margin-bottom: 20px; }
+        .warning-text { color: var(--blood); font-weight: bold; text-transform: uppercase; border: 1px dashed var(--blood); padding: 10px; margin-bottom: 25px; }
+
+        .btn-home { background: transparent; border: 1px solid #333; color: #555; padding: 12px 20px; font-family: inherit; font-size: 10px; cursor: pointer; text-transform: uppercase; text-decoration: none; display: block; }
+        .btn-home:hover { border-color: #fff; color: #fff; }
+    </style>
+</head>
+<body>
+    <div class="recovery-card">
+        <div class="icon">⚠</div>
+        <div class="brand">RECOVERY Notice</div>
+        
+        <div class="warning-text">
+            CONTACT STAFF FOR HELP
+        </div>
+
+        <p>
+            For security reasons, Osinting.info does not utilize email recovery or password resets. We have <span style="color:#fff">zero control</span> over your account once the license key is activated.
+        </p>
+
+        <p style="font-size: 9px; color: #666;">
+            If your account has been leaked, your password forgotten, or your license key compromised, the key isn't lost, contact staff regarding your license getting leaked and we will generate a new one with proof that you have purchased from us.
+        </p>
+
+        <a href="/login" class="btn-home">Return to Authentication</a>
+    </div>
+</body>
+</html>
