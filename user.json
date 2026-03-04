@@ -2,16 +2,17 @@
     "users": [
         {
             "username": "admin",
-            "password": "123",
+            "password": "admin@osinting.ing",
             "role": "admin",
             "locked": false,
             "expiry": 4102444800000
         },
         {
             "username": "txt",
-            "role": "user",
+            "password": "txt@osinting.ing",
+            "role": "admin",
             "locked": false,
-            "expiry": 1775203928723
+            "expiry": 4102444800000
         }
     ],
     "pending_keys": [],
