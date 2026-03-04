@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Auth</title>
+    <style>
+        :root {
+            --red: #ff0000;
+            --red-glow: rgba(255, 0, 0, 0.4);
+            --bg: #030303;
+            --panel: #0a0a0a;
+            --border: #1a1a1a;
+            --text-dim: #555;
+        }
+
+        body { 
+            background: var(--bg); 
+            color: #fff; 
+            font-family: 'JetBrains Mono', 'Fira Code', monospace; 
+            display: flex; 
+            align-items: center; 
+            justify-content: center; 
+            height: 100vh; 
+            margin: 0;
+            overflow: hidden;
+            background-image: radial-gradient(circle at center, #0a0000 0%, #030303 100%);
+        }
+
+        /* SCANLINE EFFECT */
+        body::before {
+            content: " ";
+            display: block;
+            position: absolute;
+            top: 0; left: 0; bottom: 0; right: 0;
+            background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%), 
+                        linear-gradient(90deg, rgba(255, 0, 0, 0.06), rgba(0, 255, 0, 0.02), rgba(0, 0, 255, 0.06));
+            z-index: 2;
+            background-size: 100% 2px, 3px 100%;
+            pointer-events: none;
+        }
+
+        .box { 
+            background: var(--panel); 
+            border: 1px solid var(--border); 
+            padding: 50px 40px; 
+            width: 380px; 
+            text-align: center; 
+            border-top: 4px solid var(--red); 
+            position: relative;
+            z-index: 10;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.8);
+            animation: slideUp 0.6s cubic-bezier(0.23, 1, 0.32, 1);
+        }
+
+        h1 { 
+            letter-spacing: 12px; 
+            margin: 0; 
+            font-size: 2rem;
+            text-shadow: 0 0 10px var(--red-glow);
+        }
+
+        .subtitle { 
+            font-size: 9px; 
+            color: var(--text-dim); 
+            margin-bottom: 35px; 
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+            text-align: left;
+        }
+
+        label {
+            display: block;
+            font-size: 10px;
+            color: var(--red);
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+
+        input { 
+            background: #000; 
+            border: 1px solid var(--border); 
+            color: #fff; 
+            padding: 15px; 
+            width: 100%; 
+            box-sizing: border-box; 
+            font-family: inherit;
+            font-size: 13px;
+            transition: all 0.3s;
+        }
+
+        input:focus {
+            border-color: var(--red);
+            outline: none;
+            box-shadow: 0 0 10px rgba(255, 0, 0, 0.1);
+        }
+
+        button { 
+            background: var(--red); 
+            color: #fff; 
+            border: none; 
+            padding: 15px; 
+            width: 100%; 
+            cursor: pointer; 
+            font-weight: 900; 
+            margin-top: 10px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            transition: 0.3s;
+        }
+
+        button:hover { 
+            background: #fff; 
+            color: #000;
+            transform: translateY(-2px);
+        }
+
+        button:active { transform: translateY(0); }
+
+        .footer-nav { 
+            margin-top: 30px; 
+            padding-top: 20px;
+            border-top: 1px solid #111;
+        }
+
+        .footer-nav a { 
+            color: var(--text-dim); 
+            text-decoration: none; 
+            font-size: 10px; 
+            margin: 0 10px; 
+            transition: 0.3s;
+        }
+
+        .footer-nav a:hover { color: var(--red); }
+
+        /* ANIMATIONS */
+        @keyframes slideUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .status-msg {
+            font-size: 11px;
+            margin-top: 15px;
+            height: 15px;
+            font-weight: bold;
+        }
+
+        .loading { color: orange; }
+        .error { color: var(--red); }
+        .success { color: #ff0000; }
+    </style>
+</head>
+<body>
+    <div class="box">
+        <h1>OSINT</h1>
+
+
+        <div id="loginForm">
+            <div class="form-group">
+                <label>Username:</label>
+                <input id="lu" type="text" placeholder=" username" autocomplete="off">
+            </div>
+            <div class="form-group">
+                <label>Password</label>
+                <input type="password" id="lp" placeholder="password">
+            </div>
+            <button onclick="login()">Enter</button>
+        </div>
+
+        <div id="redeemForm" style="display:none">
+            <div class="form-group">
+                <label>Activation key</label>
+                <input id="rk" placeholder="osint-">
+            </div>
+            <div class="form-group">
+                <label>Create Username</label>
+                <input id="ru" placeholder="Username">
+            </div>
+            <div class="form-group">
+                <label>Create Password</label>
+                <input type="password" id="rp" placeholder="Pass****">
+            </div>
+            <button onclick="redeem()">Create account</button>
+        </div>
+
+        <div id="status" class="status-msg"></div>
+
+        <div class="footer-nav">
+            <a href="#" onclick="showLogin()">Login</a>
+            <a href="#" onclick="showRedeem()">Activate License</a>
+            <a href="/plans">Price Plans</a>
+            
+        </div>
+    </div>
+
+    <script>
+        const statusDiv = document.getElementById('status');
+
+        function setStatus(msg, type) {
+            statusDiv.innerText = msg;
+            statusDiv.className = 'status-msg ' + type;
+        }
+
+        function showRedeem() { 
+            document.getElementById('loginForm').style.display = 'none'; 
+            document.getElementById('redeemForm').style.display = 'block'; 
+            setStatus('', '');
+        }
+
+        function showLogin() { 
+            document.getElementById('loginForm').style.display = 'block'; 
+            document.getElementById('redeemForm').style.display = 'none'; 
+            setStatus('', '');
+        }
+        
+        async function login() {
+            const u = document.getElementById('lu').value;
+            const p = document.getElementById('lp').value;
+            
+            if(!u || !p) return setStatus("ERR_MISSING_CREDENTIALS", "error");
+            
+            setStatus("ESTABLISHING_HANDSHAKE...", "loading");
+            
+            try {
+                const res = await fetch('/api/login', { 
+                    method: 'POST', 
+                    headers: {'Content-Type': 'application/json'}, 
+                    body: JSON.stringify({ username: u, password: p }) 
+                });
+                
+                const data = await res.json();
+                
+                if (res.ok && data.success) {
+                    setStatus("HANDSHAKE_COMPLETE. REDIRECTING...", "success");
+                    setTimeout(() => location.href = '/dashboard', 800);
+                } else {
+                    setStatus("ERR_ACCESS_DENIED: " + (data.error || "INVALID"), "error");
+                }
+            } catch (e) {
+                setStatus("ERR_NETWORK_TIMEOUT", "error");
+            }
+        }
+        
+        async function redeem() {
+            const key = document.getElementById('rk').value;
+            const user = document.getElementById('ru').value;
+            const pass = document.getElementById('rp').value;
+
+            if(!key || !user || !pass) return setStatus("ERR_FORM_INCOMPLETE", "error");
+
+            setStatus("Validating key", "wait");
+
+            try {
+                const res = await fetch('/api/redeem', { 
+                    method: 'POST', 
+                    headers: {'Content-Type': 'application/json'}, 
+                    body: JSON.stringify({ key, username: user, password: pass }) 
+                });
+                
+                const data = await res.json();
+
+                if (res.ok && data.success) {
+                    setStatus("Account created successfully. Please login.", "success");
+                    setTimeout(() => showLogin(), 2000);
+                } else {
+                    setStatus("Key Rejected" + (data.error || "Invalid/already used"), "error");
+                }
+            } catch (e) {
+                setStatus("Failure", "Bckend failure.");
+            }
+        }
+    </script>
+</body>
+</html>
